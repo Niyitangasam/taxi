@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 
 require('./routes/driversRoutes')(app);
+require('./routes/tripsRoutes')(app);
 
 console.log('in server.js');
 

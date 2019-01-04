@@ -44,7 +44,7 @@ module.exports = (app) => {
     res.send({ status: 200, data: driver });
   });
   // Get all available drivers
-  app.get('/api/availableIn3Km/', async (req, res) => {
+  app.get('/api/availableIn3Km', async (req, res) => {
     const driver = await Driver.find(d => d.distance === 3);
     if (!driver) res.status(404).send('No Driver in 3 Km');
     res.send({ status: 200, data: driver });
