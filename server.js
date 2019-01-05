@@ -1,13 +1,13 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const driversRoutes = require('./routes/driversRoutes');
 
 const app = express();
 
-require('./routes/driversRoutes')(app);
-require('./routes/tripsRoutes')(app);
 
-console.log('in server.js');
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log('Listening on Port', PORT);
-});
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+// PORT
+const port = process.env.PORT || 3000;
+app.use('/drivers', driversRoutes);
+app.listen(port, () => console.log(`listening on port ${port}`));
