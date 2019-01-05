@@ -9,5 +9,5 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // PORT
 const port = process.env.PORT || 3000;
-app.use('/drivers', driversRoutes);
+app.use('/api/drivers', driversRoutes);
 app.listen(port, () => console.log(`listening on port ${port}`));

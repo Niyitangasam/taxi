@@ -5,8 +5,8 @@ const router = express.Router();
 
 
 router.get('/', driversController.getAll);
-
-
+router.get('/available', driversController.getAvailable);
+router.get('/:id', driversController.getById);
 module.exports = router;
 
 // module.exports = (app) => {
