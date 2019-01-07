@@ -6,7 +6,7 @@ exports.getAll = (req, res) => {
   return db.Driver.findAll()
     .then(drivers => res.send(drivers))
     .catch((err) => {
-      res.send(200, JSON.stringfy(err));
+      res.send(400, JSON.stringfy(err));
       return res(err);
     });
 };
@@ -16,7 +16,7 @@ exports.getAvailable = (req, res) => {
   return db.Driver.findAll({ where: { available: true } })
     .then(drivers => res.send(drivers))
     .catch((err) => {
-      res.send(200, JSON.stringfy(err));
+      res.send(400, JSON.stringfy(err));
     });
 };
 
@@ -30,10 +30,22 @@ exports.getAvailable = (req, res) => {
 //     });
 // };
 
-exports.getById = (req, res) => {
-  return db.Driver.findById(req.params.id)
+exports.getById = (req, res, next) => {
+  let result = {};
+  db.Driver.count({ where: { id: req.params.id } }).then((count) => {
+    if (count !== 0) {
+      next();
+    } else {
+      result = res.status(400).json('Driver not found');
+    }
+  });
+
+
+  db.Driver.findById(req.params.id)
     .then(driver => res.send(driver))
     .catch((err) => {
-      res.send(200, JSON.stringfy(err));
+      result = res.send(400, JSON.stringfy(err));
     });
+
+  return result;
 };
