@@ -4,7 +4,7 @@
   "description": "An API that manage fleet of drivers and allocate drivers to passanger",
   "main": "server.js",
   "scripts": {
-    "test": "node ./node_modules/mocha/bin/mocha"
+    "test": "node ./node_modules/mocha/bin/mocha --timeout 10000"
   },
   "repository": {
     "type": "git",

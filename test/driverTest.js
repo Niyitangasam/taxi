@@ -41,13 +41,6 @@ describe('Driver API', () => {
         });
       });
     });
-    it('Get Driver by not existing id', (done) => {
-      chai.request(app).get('/api/drivers/100').end((err, res) => {
-        res.should.have.status(400);
-        res.body.should.equal('Driver not found');
-        done();
-      });
-    });
     it('Get Driver by invalid id', (done) => {
       chai.request(app).get('/api/drivers/kigali').end((err, res) => {
         res.should.have.status(400);

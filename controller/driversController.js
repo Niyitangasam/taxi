@@ -30,22 +30,19 @@ exports.getAvailable = (req, res) => {
 //     });
 // };
 
-exports.getById = (req, res, next) => {
-  let result = {};
-  db.Driver.count({ where: { id: req.params.id } }).then((count) => {
-    if (count !== 0) {
-      next();
-    } else {
-      result = res.status(400).json('Driver not found');
-    }
-  });
 
-
-  db.Driver.findById(req.params.id)
-    .then(driver => res.send(driver))
-    .catch((err) => {
-      result = res.send(400, JSON.stringfy(err));
-    });
-
-  return result;
+exports.getById = (req, res) => {
+  let queryResult;
+  if (isNaN(req.params.id)) {
+    queryResult = res.status(400).json('Invalid ID Given');
+  } else {
+    db.Driver.findById(req.params.id)
+      .then((driver) => {
+        queryResult = res.status(200).send(driver);
+      })
+      .catch((err) => {
+        queryResult = res.send(400, JSON.stringfy(err));
+      });
+  }
+  return queryResult;
 };
