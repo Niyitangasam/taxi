@@ -13,17 +13,21 @@ module.exports = {
       }], {});
     */
       return queryInterface.bulkInsert('Drivers', [{
-      names: 'kigali',
-      distance: 5,
-      location: 'butare',
+      names: 'Mihogo',
       available: true,
+      LocationId: 2,
       createdAt: new Date().toDateString(),
       updatedAt: new Date().toDateString()
-    }, {
-      names: 'sam',
-      distance: 3,
-      location: 'butare',
+    },{
+      names: 'Rugema',
+      available: false,
+      LocationId: 1,
+      createdAt: new Date().toDateString(),
+      updatedAt: new Date().toDateString()
+    } ,{
+      names: 'Samuel',
       available: true,
+      LocationId: 3,
       createdAt: new Date().toDateString(),
       updatedAt: new Date().toDateString()
     }], {});

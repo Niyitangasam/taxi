@@ -1,4 +1,3 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Trip = sequelize.define('Trip', {
     startLocation: DataTypes.STRING,
