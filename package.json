@@ -1,0 +1,36 @@
+{
+  "name": "taxi24",
+  "version": "1.0.0",
+  "description": "An API that manage fleet of drivers and allocate drivers to passanger",
+  "main": "server.js",
+  "scripts": {
+    "test": "node ./node_modules/mocha/bin/mocha --timeout 10000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Niyitangasam/Taxi24.git"
+  },
+  "author": "Samuel NIYITANGA",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Niyitangasam/Taxi24/issues"
+  },
+  "homepage": "https://github.com/Niyitangasam/Taxi24#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "express": "^4.16.4",
+    "mocha": "^5.2.0",
+    "npm": "^6.5.0",
+    "request": "^2.88.0",
+    "sequelize": "^4.42.0",
+    "sequelize-cli": "^5.4.0",
+    "sqlite3": "^4.0.4"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "nodemon": "^1.18.9"
+  }
+}
