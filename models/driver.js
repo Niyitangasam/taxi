@@ -1,12 +1,14 @@
 module.exports = (sequelize, DataTypes) => {
   const Driver = sequelize.define('Driver', {
     names: DataTypes.STRING,
-    distance: DataTypes.FLOAT,
-    location: DataTypes.STRING,
-    available: DataTypes.BOOLEAN,
+    available: {
+      type:DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   }, {});
   Driver.associate = function(models) {
     // associations can be defined here
+    Driver.belongsTo(models.Location);
   };
   return Driver;
 };
