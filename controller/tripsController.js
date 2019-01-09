@@ -30,7 +30,6 @@ exports.complete = (req, res) => {
       })
         .then(() => res.send(trip))
         .catch((err) => {
-          console.log('***Error updating contact', JSON.stringify(err));
           res.status(400).send(err);
         });
     });
