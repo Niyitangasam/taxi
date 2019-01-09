@@ -39,9 +39,9 @@ exports.complete = (req, res) => {
 // Get a list of active trip
 
 exports.getAllActive = (req, res) => {
-  return db.Trip.findAll({ where: { completed: false } })
+  return db.Trip.findAll({ where: { completed: true } })
     .then(trip => res.send(trip))
     .catch((err) => {
-      res.send(200, JSON.stringfy(err));
+      res.status(400).send(err);
     });
 };
