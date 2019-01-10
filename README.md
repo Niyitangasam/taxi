@@ -1,5 +1,5 @@
 
-[![Build Status](https://https://travis-ci.org/Niyitangasam/Taxi24.svg?branch=master)](https://travis-ci.org/Niyitangasam/Taxi24)
+[![Build Status](https://travis-ci.org/Niyitangasam/Taxi24.svg?branch=master)](https://travis-ci.org/Niyitangasam/Taxi24)
 	
 # Taxi24
 
