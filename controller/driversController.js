@@ -17,16 +17,19 @@ exports.getAvailable = (req, res) => {
   return db.Driver.findAll({ where: { available: true } })
     .then(drivers => res.send(drivers))
     .catch((err) => {
-      res.send(400, JSON.stringfy(err));
+      res.status(400).send(err);
     });
 };
 
 // Get a list of all available drivers within 3 km for a specific location
 
 exports.getAvailableWithin3Km = (req, res) => {
-   db.Location.findOne({ where: { name: req.params.location } })
-    .then((location) => { return location.get({ plain: true }); })
-    .then((drivers) => { return res.send(drivers.longitude); })
+
+  return db.Location.findAll({ where: { name: req.params.location }, attributes: ['id','latitude','longitude'] })
+    .map(el => el.get({ plain: true }))
+    .then((rows)=>{
+        res.send(rows[0].get('longitude').value);
+     })
     .catch((err) => {
       res.status(400).send(err);
     });

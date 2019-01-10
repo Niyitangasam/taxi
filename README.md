@@ -39,10 +39,10 @@ Check the port that your sever is running  listen to but by default it will be `
  2. To get a list of all available drivers: `http://localhost:3000/api/drivers/available`.
  3. To get a list of all available drivers in 3 Km for specif location: `http://localhost:3000/api/drivers/availableNear/Nyamirambo`-replace Nyamirambo with any location.
  4. To get a driver bys specific id : `http://localhost:3000/api/drivers/5` - replace 5 with any id.
- 5.To create a new trip: `http://localhost:3000/api/trips`
- 6.To complete a trip: `http://localhost:3000/api/trips/complete/1` - replace 1 with any id of trip you want to complete
- 7.To get a list of all active trip:`http://localhost:3000/api/trips/active`
- 8.To get a list of all riders: `http://localhost:3000/api/riders/`
+ 5. To create a new trip: `http://localhost:3000/api/trips`
+ 6. To complete a trip: `http://localhost:3000/api/trips/complete/1` - replace 1 with any id of trip you want to complete
+ 7. To get a list of all active trip:`http://localhost:3000/api/trips/active`
+ 8. To get a list of all riders: `http://localhost:3000/api/riders/`
  9. To get a specif rider by ID: `http://localhost:3000/api/riders/1` - replace 1 with any id you want to access
  10. To get a list of closest riders: `http://localhost:3000/api/riders/Samuel` - replace Samuel with the name of rider
     

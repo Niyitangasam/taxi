@@ -18,21 +18,15 @@ exports.create = (req, res) => {
 
 // complete a trip
 
-exports.complete = (req, res) => {
-  const id = parseInt(req.params.id, 10);
-  return db.Trip.findById(id)
-    .then((trip) => {
-      const {
-        startLocation, endLocation, driverId, riderId, completed = true,
-      } = trip;
-      return trip.update({
-        startLocation, endLocation, driverId, riderId, completed,
-      })
-        .then(() => res.send(trip))
-        .catch((err) => {
-          res.status(400).send(err);
-        });
-    });
+exports.complete = (req, res, next) => {
+  return db.Trip.update(
+    { completed: true },
+    { returning: true, where: { id: req.params.id } },
+  )
+    .then(updatedBook=> {
+      res.send(updatedBook);
+    })
+    .catch(next);
 };
 
 // Get a list of active trip
