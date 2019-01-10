@@ -1,4 +1,8 @@
+
+[![Build Status](https://https://travis-ci.org/Niyitangasam/Taxi24.svg?branch=master)](https://travis-ci.org/Niyitangasam/Taxi24)
+	
 # Taxi24
+
 
 
 Taxi24 is a server implementation built on top Node.js and Express.js with [sequelizejs](http://docs.sequelizejs.com/) for SQLITE integration. 
