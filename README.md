@@ -22,6 +22,7 @@ You need to have [Node.js](https://nodejs.org/en/) and [npm](https://www.npmjs.c
 
 * Install all dependencies: `npm install`
 
+* First delete taxi24.sqlite3 in your root folder to start a fresh
 * Run `sequelize db:migrate` to create database and tables
 
 * Now you can seed the database but follow below sequence because some data has references from other tables.
