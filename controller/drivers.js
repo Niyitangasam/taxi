@@ -3,7 +3,6 @@ import models from '../models';
 
 const { Driver, Location } = models;
 
-
 /**
  * @author Samuel Niyitanga
  * @exports DriverController
@@ -12,56 +11,52 @@ const { Driver, Location } = models;
  * */
 class DriverController {
   // Get a list of all drivers
-  static getAll(req, res) {
-    return Driver.findAll()
-      .then(drivers => res.send(drivers))
-      .catch((err) => {
-        res.status(400).send(err);
-        return res(err);
-      });
+  static async getAll(req, res) {
+    try {
+      const riders = await Driver.findAll();
+      return res.status(200).send(riders);
+    } catch (error) {
+      return res.status(500).send(error);
+    }
   }
 
   // Get a list of all available drivers
-  static getAvailable(req, res) {
-    return Driver.findAll({ where: { available: true } })
-      .then(drivers => res.send(drivers))
-      .catch((err) => {
-        res.status(400).send(err);
+  static async getAvailable(req, res) {
+    try {
+      const availableRiders = await Driver.findAll({
+        where: { available: true },
       });
+      return res.status(200).send(availableRiders);
+    } catch (error) {
+      return res.status(500).send(error);
+    }
   }
 
   // Get a list of all available drivers within 3 km for a specific location
 
   static getAvailableWithin3Km(req, res) {
-    return Location.findAll({ where: { name: req.params.location }, attributes: ['id', 'latitude', 'longitude'] })
-      .map(el => el.get({ plain: true }))
-      .then((rows) => {
-        res.send(rows[0].get('longitude').value);
-      })
-      .catch((err) => {
-        res.status(400).send(err);
+    try {
+      const available = Location.findAll({
+        where: { name: req.params.location },
+        attributes: ['id', 'latitude', 'longitude'],
       });
+      const availableMapped = available.map(el => el.get({ plain: true }));
+      const availableNear = availableMapped[0].get('longitude').value;
+      return res.status(200).send(availableNear);
+    } catch (error) {
+      return res.status(500).send(error);
+    }
   }
 
-  static getById(req, res) {
-    let queryResult;
-    // eslint-disable-next-line no-restricted-globals
-    if (isNaN(req.params.id)) {
-      queryResult = res.status(400).json('Invalid ID Given');
-    } else {
-      Driver.findById(req.params.id)
-        .then((driver) => {
-          if (driver) {
-            queryResult = res.status(200).send(driver);
-          } else {
-            res.status(404).json('Not Existing');
-          }
-        })
-        .catch((err) => {
-          queryResult = res.send(400, JSON.stringfy(err));
-        });
+  static async getById(req, res) {
+    try {
+      const specifDriver = await Driver.findOne({
+        where: { id: req.params.id },
+      });
+      return res.status(200).send(specifDriver);
+    } catch (error) {
+      return res.status(500).send(error);
     }
-    return queryResult;
   }
 }
 export default DriverController;

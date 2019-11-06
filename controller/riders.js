@@ -12,21 +12,21 @@ class RiderController {
   static async getAll(req, res) {
     try {
       const riders = await Rider.findAll();
-      return res.send(riders);
+      return res.status(200).send(riders);
     } catch (error) {
-      return res.send(error);
+      return res.status(500).send(error);
     }
   }
   // Get a specific driver by id
 
   static async getById(req, res) {
     try {
-      const specifDriver = await Rider.findOne({
+      const specifRider = await Rider.findOne({
         where: { id: req.params.id },
       });
-      return res.send(specifDriver);
+      return res.status(200).send(specifRider);
     } catch (error) {
-      return res.send(error);
+      return res.status(500).send(error);
     }
   }
 }
