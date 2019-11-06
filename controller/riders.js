@@ -9,22 +9,25 @@ const { Rider } = models;
  * @description Handles all related riders functionalities
  * */
 class RiderController {
-  static getAll(req, res) {
-    return Rider.findAll()
-      .then(riders => res.send(riders))
-      .catch((err) => {
-        res.send(200, JSON.stringfy(err));
-        return res(err);
-      });
+  static async getAll(req, res) {
+    try {
+      const riders = await Rider.findAll();
+      return res.send(riders);
+    } catch (error) {
+      return res.send(error);
+    }
   }
   // Get a specific driver by id
 
-  static getById(req, res) {
-    return Rider.findById(req.params.id)
-      .then(rider => res.send(rider))
-      .catch((err) => {
-        res.send(200, JSON.stringfy(err));
+  static async getById(req, res) {
+    try {
+      const specifDriver = await Rider.findOne({
+        where: { id: req.params.id },
       });
+      return res.send(specifDriver);
+    } catch (error) {
+      return res.send(error);
+    }
   }
 }
 export default RiderController;
