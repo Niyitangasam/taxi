@@ -1,7 +1,7 @@
 import express from 'express';
 import drivers from './drivers';
-import riders from './trips';
-import trips from './riders';
+import riders from './riders';
+import trips from './trips';
 
 const router = express.Router();
 
