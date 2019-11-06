@@ -64,7 +64,7 @@ const locationSeeder = {
     );
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: () => {
 
   },
 };

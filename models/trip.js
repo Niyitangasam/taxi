@@ -14,7 +14,7 @@ const trip = (sequelize, DataTypes) => {
     },
     {},
   );
-  Trip.associate = (models) => {
+  Trip.associate = () => {
   };
   return Trip;
 };

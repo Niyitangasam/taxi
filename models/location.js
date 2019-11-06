@@ -8,7 +8,7 @@ const location = (sequelize, DataTypes) => {
     },
     {},
   );
-  Location.associate = (models) => {
+  Location.associate = () => {
     // associations can be defined here
   };
   return Location;

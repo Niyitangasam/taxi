@@ -12,7 +12,7 @@ const DriverSeeder = {
       LocationId: 1,
       createdAt: new Date().toDateString(),
       updatedAt: new Date().toDateString(),
-    } , {
+    }, {
       names: 'Samuel',
       available: true,
       LocationId: 3,
@@ -21,7 +21,7 @@ const DriverSeeder = {
     }], {});
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: () => {
 
   },
 };

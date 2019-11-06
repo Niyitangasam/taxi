@@ -6,7 +6,7 @@ const rider = (sequelize, DataTypes) => {
     },
     {},
   );
-  Rider.associate = (models) => {
+  Rider.associate = () => {
     // associations can be defined here
   };
   return Rider;

@@ -8,14 +8,14 @@ const riderSeeder = {
       names: 'NIKOBAHOZE',
       createdAt: new Date().toDateString(),
       updatedAt: new Date().toDateString(),
-    } , {
+    }, {
       names: 'Samuel',
       createdAt: new Date().toDateString(),
       updatedAt: new Date().toDateString(),
     }], {});
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: () => {
 
   },
 };

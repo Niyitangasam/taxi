@@ -29,6 +29,6 @@ const tripSeeder = {
     );
   },
 
-  down: (queryInterface) => {},
+  down: () => {},
 };
 export default tripSeeder;

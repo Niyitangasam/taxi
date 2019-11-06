@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "pretest": "npm run lint:fix && npm run undo:migrate && npm run migrate:test",
-    "test": "NODE_ENV=test nyc mocha --require @babel/register --require dotenv/config \"tests/**/*.js\" --exit",
+    "test": "NODE_ENV=test nyc mocha --require @babel/register --require dotenv/config \"test/*.js\" --exit",
     "lint": "eslint --ignore-path .gitignore .",
     "lint:fix": "npm run lint -- --fix",
     "start:dev": "nodemon --exec  node --require @babel/register --require dotenv/config server.js",
