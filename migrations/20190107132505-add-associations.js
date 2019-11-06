@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = {
+const associations = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.addColumn(
       'Drivers',
@@ -17,10 +15,11 @@ module.exports = {
     );
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: (queryInterface) => {
     return queryInterface.removeColumn(
       'Drivers',
-      'LocationId'
+      'LocationId',
     );
-  }
+  },
 };
+export default associations;

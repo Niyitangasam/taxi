@@ -4,7 +4,17 @@
   "description": "An API that manage fleet of drivers and allocate drivers to passanger",
   "main": "server.js",
   "scripts": {
-    "test": "node ./node_modules/mocha/bin/mocha --timeout 10000"
+    "pretest": "npm run lint:fix && npm run undo:migrate && npm run migrate:test",
+    "test": "NODE_ENV=test nyc mocha --require @babel/register --require dotenv/config \"tests/**/*.js\" --exit",
+    "lint": "eslint --ignore-path .gitignore .",
+    "lint:fix": "npm run lint -- --fix",
+    "start:dev": "nodemon --exec  node --require @babel/register --require dotenv/config server.js",
+    "start": " npm run migrate && node --require @babel/register --require dotenv/config ./server.js",
+    "migrate": "./node_modules/.bin/sequelize db:migrate",
+    "migrate:test": "NODE_ENV=test npm run migrate",
+    "undo:migrate": "NODE_ENV=test sequelize db:migrate:undo:all",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "seed": "./node_modules/.bin/sequelize db:seed:all"
   },
   "repository": {
     "type": "git",
@@ -17,21 +27,55 @@
   },
   "homepage": "https://github.com/Niyitangasam/Taxi24#readme",
   "dependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.0",
     "body-parser": "^1.18.3",
-    "chai": "^4.2.0",
-    "chai-http": "^4.2.1",
-    "express": "^4.16.4",
+    "cors": "^2.8.4",
+    "dotenv": "^6.2.0",
+    "express": "^4.17.0",
+    "express-jwt": "^5.3.1",
+    "express-session": "^1.15.6",
     "geopoint": "^1.0.1",
-    "mocha": "^5.2.0",
-    "npm": "^6.5.0",
-    "request": "^2.88.0",
-    "sequelize": "^4.42.0",
-    "sequelize-cli": "^5.4.0",
-    "sqlite3": "^4.0.4"
+    "joi": "^14.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "methods": "^1.1.2",
+    "nodemon": "^1.18.11",
+    "pg": "^7.11.0",
+    "pg-hstore": "^2.3.2",
+    "request": "^2.87.0",
+    "sequelize": "^5.8.6",
+    "sequelize-cli": "^5.4.0"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "babel-polyfill": "^6.26.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "coveralls": "^3.0.3",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "nodemon": "^1.18.9"
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-mocha": "^5.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "mocha": "^6.1.4",
+    "mocha-lcov-reporter": "^1.3.0",
+    "nyc": "^14.1.1",
+    "prettier": "^1.17.1"
+  },
+  "nyc": {
+    "require": [
+      "@babel/register",
+      "dotenv/config"
+    ],
+    "reporter": [
+      "lcov",
+      "text",
+      "html"
+    ]
   }
 }
