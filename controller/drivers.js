@@ -34,9 +34,9 @@ class DriverController {
 
   // Get a list of all available drivers within 3 km for a specific location
 
-  static getAvailableWithin3Km(req, res) {
+  static async getAvailableWithin3Km(req, res) {
     try {
-      const available = Location.findAll({
+      const available = await Location.findAll({
         where: { name: req.params.location },
         attributes: ['id', 'latitude', 'longitude'],
       });

@@ -6,13 +6,15 @@ const trip = (sequelize, DataTypes) => {
       endLocation: DataTypes.STRING,
       driverId: DataTypes.INTEGER,
       riderId: DataTypes.INTEGER,
-      completed: DataTypes.BOOLEAN,
+      completed: {
+        type: DataTypes.BOOLEAN,
+        AllowNull: false,
+        defaultValue: false,
+      },
     },
     {},
   );
   Trip.associate = (models) => {
-    Trip.belongsTo(models.Driver);
-    Trip.belongsTo(models.Rider);
   };
   return Trip;
 };

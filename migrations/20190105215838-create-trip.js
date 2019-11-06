@@ -20,6 +20,8 @@ const tripMigration = {
         type: Sequelize.INTEGER,
       },
       completed: {
+        allowNull: false,
+        defaultValue: false,
         type: Sequelize.BOOLEAN,
       },
       createdAt: {
