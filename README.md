@@ -5,7 +5,8 @@
 
 
 
-Taxi24 is a server implementation built on top Node.js and Express.js with [sequelizejs](http://docs.sequelizejs.com/) AS ORM for  PostgreSQL. 
+Taxi24 is a server implementation of providing a white-label solution to the
+existing taxi companies built on top Node.js and Express.js with [sequelizejs](http://docs.sequelizejs.com/) AS ORM for  PostgreSQL. 
 
 
 ## Running Project
@@ -37,6 +38,10 @@ You will also need postgresql as database [PostgreSQL](https://www.postgresql.or
 ## Testing API
 
 Testing API using [Postman](https://www.getpostman.com) and [Google Chrome](https://www.google.com/chrome/)
+
+### Documentation
+
+https://documenter.getpostman.com/view/662647/SW17Tw2p
 
 ### Endpoints
 
