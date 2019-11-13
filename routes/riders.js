@@ -8,6 +8,6 @@ const router = express.Router();
 
 router.get('/', RiderController.getAll);
 router.get('/:id', ValidationMiddleware.validateId, RiderController.getById);
-// router.get('/near', RiderController.getNear);
+router.get('/near/:name', ValidationMiddleware.validateString, RiderController.getNear);
 
 export default router;

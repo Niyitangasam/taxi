@@ -11,7 +11,11 @@ const driver = (sequelize, DataTypes) => {
     {},
   );
   Driver.associate = (models) => {
-    Driver.belongsTo(models.Location);
+    Driver.belongsTo(models.Location, {
+      foreignKey: 'LocationId',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   };
   return Driver;
 };

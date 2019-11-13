@@ -1,6 +1,6 @@
 import models from '../models';
 
-const { Trip } = models;
+const { Trip, Invoice } = models;
 
 /**
  * @author Samuel Niyitanga
@@ -30,11 +30,27 @@ class TripController {
 
   static async complete(req, res) {
     try {
+      const { amount, id } = req.params;
+      const trip = await Trip.findAll({ where: { id } });
+
+      if (trip.length === 0) {
+        return res.status(400).send({ message: 'Entered trip not found' });
+      }
+
+      if (trip[0].completed) {
+        return res.status(422).send({ message: 'Trip already completed!' });
+      }
       const completedTrip = await Trip.update(
         { completed: true },
         { returning: true, where: { id: req.params.id } },
       );
-      return res.status(200).send(completedTrip);
+
+      await Invoice.create({
+        amount,
+        tripId: id,
+      });
+
+      return res.status(200).send({ completedTrip, amount });
     } catch (error) {
       return res.status(500).send(error);
     }

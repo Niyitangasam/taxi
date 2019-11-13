@@ -14,7 +14,12 @@ const trip = (sequelize, DataTypes) => {
     },
     {},
   );
-  Trip.associate = () => {
+  Trip.associate = (models) => {
+    Trip.hasMany(models.Trip, {
+      foreignKey: 'id',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   };
   return Trip;
 };

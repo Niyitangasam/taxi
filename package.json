@@ -9,7 +9,7 @@
     "lint": "eslint --ignore-path .gitignore .",
     "lint:fix": "npm run lint -- --fix",
     "start:dev": "nodemon --exec  node --require @babel/register --require dotenv/config server.js",
-    "start": " npm run migrate && node --require @babel/register --require dotenv/config ./server.js",
+    "start": "NODE_ENV=production npm run migrate && node --require @babel/register --require dotenv/config ./server.js",
     "migrate": "./node_modules/.bin/sequelize db:migrate",
     "migrate:test": "NODE_ENV=test npm run migrate",
     "undo:migrate": "NODE_ENV=test sequelize db:migrate:undo:all",
@@ -18,14 +18,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Niyitangasam/Taxi24.git"
+    "url": "git+https://github.com/Niyitangasam/Taxi.git"
   },
   "author": "Samuel NIYITANGA",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Niyitangasam/Taxi24/issues"
+    "url": "https://github.com/Niyitangasam/Taxi/issues"
   },
-  "homepage": "https://github.com/Niyitangasam/Taxi24#readme",
+  "homepage": "https://github.com/Niyitangasam/Taxi#readme",
   "dependencies": {
     "@babel/cli": "^7.4.3",
     "@babel/core": "^7.4.5",
@@ -39,10 +39,7 @@
     "express": "^4.17.0",
     "express-jwt": "^5.3.1",
     "express-session": "^1.15.6",
-    "geopoint": "^1.0.1",
-    "joi": "^14.3.1",
-    "jsonwebtoken": "^8.5.1",
-    "methods": "^1.1.2",
+    "geolib": "^3.1.0",
     "nodemon": "^1.18.11",
     "pg": "^7.11.0",
     "pg-hstore": "^2.3.2",

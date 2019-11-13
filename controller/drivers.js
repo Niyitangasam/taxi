@@ -1,4 +1,4 @@
-// import geopoint from 'geopoint';
+import Util from '../utils/util';
 import models from '../models';
 
 const { Driver, Location } = models;
@@ -25,6 +25,10 @@ class DriverController {
     try {
       const availableRiders = await Driver.findAll({
         where: { available: true },
+        include: [
+          { model: Location, attributes: ['id', 'name', 'latitude', 'longitude'] },
+        ],
+        attributes: ['id', 'names'],
       });
       return res.status(200).send(availableRiders);
     } catch (error) {
@@ -36,13 +40,32 @@ class DriverController {
 
   static async getAvailableWithin3Km(req, res) {
     try {
-      const available = await Location.findAll({
-        where: { name: req.params.location },
-        attributes: ['id', 'latitude', 'longitude'],
+      const { latitude, longitude } = req.query;
+      if (!latitude || !longitude) {
+        return res.status(400)
+          .send({ message: 'location details are invalid' });
+      }
+      const available = await Driver.findAll({
+        where: { available: true },
+        include: [
+          { model: Location, attributes: ['id', 'name', 'latitude', 'longitude'] },
+        ],
+        attributes: ['id', 'names'],
       });
-      const availableMapped = available.map(el => el.get({ plain: true }));
-      const availableNear = availableMapped[0].get('longitude').value;
-      return res.status(200).send(availableNear);
+      const availableNearSpecificLocation = available.filter((driver) => {
+        const {
+          latitude: latitudeToCompare, longitude: longitudeToCompare,
+        } = driver.dataValues.Location.dataValues;
+        if (Util.getWithIn3Km(latitude, longitude, latitudeToCompare, longitudeToCompare)) {
+          return driver;
+        }
+        return {};
+      });
+      if (availableNearSpecificLocation.length === 0) {
+        return res.status(404)
+          .send({ message: 'No drivers available within 3 Km' });
+      }
+      return res.status(200).send(available);
     } catch (error) {
       return res.status(500).send(error);
     }
@@ -53,6 +76,10 @@ class DriverController {
       const specifDriver = await Driver.findOne({
         where: { id: req.params.id },
       });
+      if (!specifDriver) {
+        return res.status(404)
+          .send({ message: 'No drivers with that ID found' });
+      }
       return res.status(200).send(specifDriver);
     } catch (error) {
       return res.status(500).send(error);

@@ -8,8 +8,11 @@ const location = (sequelize, DataTypes) => {
     },
     {},
   );
-  Location.associate = () => {
-    // associations can be defined here
+  Location.associate = (models) => {
+    Location.hasMany(models.Driver, {
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   };
   return Location;
 };
